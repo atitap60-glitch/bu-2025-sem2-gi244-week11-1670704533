@@ -6,6 +6,12 @@ public class Enemy : MonoBehaviour
     private Rigidbody rb;
     private GameObject player;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+    }
+
     void Start()
     {
 
@@ -14,6 +20,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Vector3 dir = player.transform.position - transform.forward;
+        dir.Normalize();
+        rb.AddForce(dir * speed);
     }
 }
